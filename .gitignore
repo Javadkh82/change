@@ -1,32 +1,18 @@
-# Prerequisites
-*.d
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+const int ledPin = 13;
+const int interrupt = 2;
+volatile bool led = LOW;
 
-# Precompiled Headers
-*.gch
-*.pch
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  pinMode(interrupt, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(interrupt), change, CHANGE);
+}
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+void loop() {
+  digitalWrite(ledPin, led);
+}
 
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+void change() {
+  led = !led;
+}
